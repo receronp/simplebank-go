@@ -5,7 +5,7 @@ import (
 	"log"
 
 	"github.com/receronp/simplebank-go/api"
-	"github.com/receronp/simplebank-go/db/sqlc"
+	db "github.com/receronp/simplebank-go/db/sqlc"
 	"github.com/receronp/simplebank-go/util"
 
 	_ "github.com/lib/pq"
@@ -22,7 +22,7 @@ func main() {
 		log.Fatal("cannot connect to db: ", err)
 	}
 
-	store := sqlc.NewStore(conn)
+	store := db.NewStore(conn)
 	server := api.NewServer(store)
 
 	err = server.Start(config.ServerAddress)

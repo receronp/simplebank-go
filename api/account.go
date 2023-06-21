@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/receronp/simplebank-go/db/sqlc"
+	db "github.com/receronp/simplebank-go/db/sqlc"
 )
 
 type createAccountRequest struct {
@@ -20,7 +20,7 @@ func (server *Server) createAccount(ctx *gin.Context) {
 		return
 	}
 
-	arg := sqlc.CreateAccountParams{
+	arg := db.CreateAccountParams{
 		Owner:    req.Owner,
 		Currency: req.Currency,
 		Balance:  0,
@@ -71,7 +71,7 @@ func (server *Server) listAccount(ctx *gin.Context) {
 		return
 	}
 
-	arg := sqlc.ListAccountsParams{
+	arg := db.ListAccountsParams{
 		Limit:  req.PageSize,
 		Offset: (req.PageID - 1) * req.PageSize,
 	}
@@ -96,7 +96,7 @@ func (server *Server) updateAccount(ctx *gin.Context) {
 		return
 	}
 
-	arg := sqlc.UpdateAccountParams{
+	arg := db.UpdateAccountParams{
 		ID:      req.ID,
 		Balance: req.Balance,
 	}
